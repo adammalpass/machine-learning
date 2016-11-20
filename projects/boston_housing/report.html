@@ -274,23 +274,38 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class=" highlight hl-ipython2"><pre><span class="c">## NB: Based on first review feedback I have added additional code to check calculating statistics with both numpy and pandas.</span>
+<span class="c">##     I have commented out the additional code and remaining lines just use numpy to calculate statistics as required</span>
+<span class="c">##     by the original question</span>
+
+<span class="c"># TODO: Minimum price of the data</span>
+<span class="c">#minimum_price_pd = prices.min()        #calculate statistic with pandas</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>          <span class="c">#calculate statistic with numpy</span>
+<span class="c">#print minimum_price_pd, minimum_price  #print both to compare</span>
 
 <span class="c"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="c">#maximum_price_pd = prices.max()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="c">#print maximum_price_pd, maximum_price</span>
 
 <span class="c"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c">#mean_price_pd = prices.mean()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="c">#print mean_price_pd, mean_price</span>
+
 
 <span class="c"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="c">#median_price_pd = prices.median()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="c">#print median_price_pd, median_price</span>
 
 <span class="c"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="c">#std_price_pd = prices.std()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="c">#print std_price_pd, std_price</span>
 
 <span class="c"># Show the calculated statistics</span>
 <span class="k">print</span> <span class="s">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s">&quot;</span>
@@ -317,7 +332,7 @@ Minimum price: $105,000.00
 Maximum price: $1,024,800.00
 Mean price: $454,342.94
 Median price $438,900.00
-Standard deviation of prices: $165,340.28
+Standard deviation of prices: $165,171.13
 </pre>
 </div>
 </div>
@@ -1680,8 +1695,8 @@ AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-For the model with max_depth = 1 the score of the training curve initial increases quickly until about 50 training points, but then quickly converges to about 0.4. Increasing the number of training points does little to improve the score.</p>
-<p>The testing curve also converges to around 0.45, very close to the score of the training curve. This means the model is evaluating training points just as badly as testing points. In this case adding more training points does not help since it is clear bias is the issue rather than variance. The model is not complex enough to adequately discover the patterns in the data. This makes sense in this case since the decision tree was limited to a depth of just one.</p>
+For the model with max_depth = 1 the score of the testing curve initially increases quickly until about 50 training points, but then quickly converges to about 0.4. Increasing the number of training points does little to improve the score.</p>
+<p>The training curve also converges to around 0.45, very close to the converged score of the testing curve. This means the model is evaluating training points just as badly as testing points and so adding more training points does not help since it is clear bias is the issue rather than variance. The model is not complex enough to adequately discover the patterns in the data. This makes sense in this case since the decision tree was limited to a depth of just one.</p>
 
 </div>
 </div>
@@ -2477,16 +2492,53 @@ Predicted selling price for Client 3&apos;s home: $896,962.50
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>The model prdecits that Client 1 should sell for 412,950.00.
+<p>The model predicts that Client 1 should sell for 412,950.00.
 Client 2 should sell for 234,529.79.
 Client 3 should sell for 896,962.50.</p>
-<p>In the Data Exploration section I predicted that the higher the total number of rooms, the higher the selling price. The predicted results also express this trend; client 3 has most rooms, followed by client 1 and lastly client 2, and the prices also follow this order.</p>
-<p>Equally, I predicted that lower neighbohood poverty level would increase the expected selling price of a home, and again the algorithm predicts the same thing. Client 3 has least poverty, followed by Client 1 and Client 2 and again prices follow this order.</p>
+<p>In the Data Exploration section I predicted that the higher the total number of rooms, the higher the selling price. The predicted results also express this trend; client 3 has most rooms, followed by client 1 and lastly client 2, and the prices also follow this order, with client 3 being most expensive, followed by 1, then 2.</p>
+<p>Equally, I predicted that lower neighbourhood poverty level would increase the expected selling price of a home, and again the algorithm predicts the same thing. Client 3 has least poverty, followed by Client 1 and Client 2 and again prices follow this order.</p>
 <p>Finally, I predicted that a lower student-teacher ratio would improve selling prices, and this is also suggested by the model. Client 3 has lowest ratio, followed by Client 1 and Client 2, and again prices follow suit.</p>
 <p>As for how reasonable the prices are we can see that none are less than the minimum price (105,000) or more than the maximum price (1,024,800). It wouldn't necessarily be unreasonable for the predicted value to be higher or lower than any in the original data set, depending on the features present, but the fact they are within the original range at least suggests the model isn't doing anything really strange or making really big outliers. Furthermore, we can see that all the predictions are within 3 standard deviations from the mean, which again suggests the model isnt making any big outliers.</p>
+<p>Based on feedback from first review I also want to get an idea as to how accurate the absolute values are, not just the general trend. To do this, in the cell below I have code that implements K-Nearest Neighbours to check the average selling prices of the 10 houses that most closely represent those of my three clients (in terms of features). This should further confirm how reasonable the results are.</p>
+<p>KNN with k = 10 predicts clients 1,2 and 3 should sell for 399420, 196770 and 870450 dollars respectively. These are all fairly close to the results from the decision tree however in each KNN predicts about 20k-30k lower. This could indicate a slightly high bias in the decision tree, but equally it could be some low bias in KNN; without more data/experimentation it is difficult to conclude which. However since the results are quite close it can give some confidence that the implemented decision tree is correct.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span> <span class="k">as</span> <span class="n">knn</span>
+
+<span class="n">reg</span> <span class="o">=</span> <span class="n">knn</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">client_data</span><span class="p">)):</span>
+    <span class="k">print</span> <span class="s">&quot;Predicted selling price for Client {}&#39;s home: ${:,.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Predicted selling price for Client 1&apos;s home: $399,420.00
+Predicted selling price for Client 2&apos;s home: $196,770.00
+Predicted selling price for Client 3&apos;s home: $870,450.00
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
