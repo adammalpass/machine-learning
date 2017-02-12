@@ -60,7 +60,7 @@ class LearningAgent(Agent):
         #   If it is not, create a dictionary in the Q-table for the current 'state'
         #   For each action, set the Q-value for the state-action pair to 0
         
-        state = None
+        state = (waypoint, inputs["light"], inputs["left"], inputs["oncoming"])
 
         return state
 
@@ -107,6 +107,11 @@ class LearningAgent(Agent):
         # When not learning, choose a random action
         # When learning, choose a random action with 'epsilon' probability
         #   Otherwise, choose an action with the highest Q-value for the current state
+
+        if not self.learning:
+            rand = random.randint(0,3)
+            action = self.valid_actions[rand]
+            print rand, action
  
         return action
 
@@ -163,7 +168,7 @@ def run():
     # Follow the driving agent
     # Flags:
     #   enforce_deadline - set to True to enforce a deadline metric
-    env.set_primary_agent(agent)
+    env.set_primary_agent(agent)#, enforce_deadline = True)
 
     ##############
     # Create the simulation
@@ -172,14 +177,14 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env)
+    sim = Simulator(env)#, update_delay = 0.01, log_metrics = True)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run()
+    sim.run()#n_test = 10)
 
 
 if __name__ == '__main__':
